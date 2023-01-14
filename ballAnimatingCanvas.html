@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <h1>Subject2</h1>
+        <p>Scrieti aplicatia HTML5 si codul
+            Javascript cu CSS care animeaza o bila pe diagonala unui obiect div</p>
+
+    </head>
+    <body>
+        <div>
+            <canvas id="myCanvas" width="300px" height="300px" style="border:1px solid black"></canvas>
+        </div>        
+        
+        <script>
+           var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            var x = 0;
+            var y = 0;
+            var dx = 2;
+            var dy = 2;
+
+            function drawBall() {
+                ctx.beginPath();
+                ctx.arc(x, y, 10, 0, Math.PI*2);
+                ctx.fillStyle = "#0095DD";
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            function animate(){
+                requestAnimationFrame(animate);
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                drawBall();
+                if(x>canvas.width || y>canvas.height){
+                // this is for the ball to go back to top left corner
+                    // x=0;
+                    // y=0;
+                // this is for the ball to go backways
+                    dx=-dx;
+                    dy=-dy;
+                }
+                x+=dx;
+                y+=dy;
+            }
+
+            animate();
+            // setInterval(animate,10);
+
+        
+        </script>
+    </body>
+</html>

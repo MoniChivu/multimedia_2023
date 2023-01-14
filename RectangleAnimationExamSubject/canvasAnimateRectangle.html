@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <h1>Subject 1</h1>
+        <p>Scrieti aplicatia HTML5 si codul
+            Javascript care deplaseazà orizonta spre stânga un pätrat rosu cu latura 10 pixeli intr-un canvas. 
+            Viteza de deplasare trebuie sà fie de 30 pixel secundã. Atunci când patratul depaseste marginea din stânga 
+            a canvas-ului trebuie repozitionat n partea dreaptã a canvas-ului.</p>
+
+    </head>
+    <body>
+        <canvas id="myCanvas" width="500px" height="500px" style="border: 1px solid black;"></canvas>
+
+        <script>
+            canvas=document.getElementById('myCanvas');
+            ctx=canvas.getContext('2d');
+            animate();
+
+            var x=500;
+            var dx=-3;
+            var y=30;
+            // var dy=1;
+
+            function animate(){
+                requestAnimationFrame(animate);
+                ctx.clearRect(0,0,500,500);
+                ctx.fill
+                ctx.beginPath();
+                ctx.fillRect(x,y,10,10);
+                ctx.fillStyle="red";
+                ctx.stroke();
+                if(x<0){
+                    x=500;
+                }
+                x+=dx;
+                // y+=dy;
+            }
+        </script>
+    </body>
+</html>
