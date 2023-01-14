@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <style>
+            .wrapper{
+                display: grid;
+                grid-template-columns: repeat(3,3fr);
+                width:100%
+            }
+
+            .one{
+                background-color: aqua;
+            }
+
+            .two{
+                background-color:blueviolet;
+                grid-area: 1/2/2/4;
+            }
+
+            .three{
+                background-color: brown;
+                grid-area: 2/1/2/4;
+            }
+
+            .four{
+                background-color: chocolate;
+                grid-column: 2/4;
+                grid-row:3;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="one">
+                Maimute
+            </div>
+            <div class="two">
+                Papagali
+            </div>
+            <div class="three">
+                Catelusi
+            </div>
+            <div class="four">Pisicute</div>
+        </div>
+    </body>
+</html>

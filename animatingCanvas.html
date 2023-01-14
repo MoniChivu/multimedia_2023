@@ -1,0 +1,40 @@
+<html>
+    <head>
+
+    </head>
+    <body>        
+        <canvas id="myCanvas" width="300px" height="300px" style="border:1px solid black"></canvas>
+        <script>
+            canvas=document.getElementById("myCanvas");
+            c=canvas.getContext("2d");
+            var x=200;
+            // velocity/speed variable
+            var dx=1;
+            var y=200;
+            var radius=30;
+            // var width=innerWidth;
+            animate();
+
+            // animation works by refreshing the page
+            function animate(){
+                // this will create an animation - will loop the function animate
+                requestAnimationFrame(animate);
+                // each time the page is refreshed we clear the canvas; 
+                c.clearRect(0,0,innerWidth,innerHeight);
+                // console.log("merge");
+                c.beginPath();
+                c.arc(x,200,radius,0,Math.PI*2,false);
+                c.strokeStyle='blue';
+                c.stroke();
+
+                if(x + radius>300 || x-radius<0){
+                    dx=-dx;
+                    console.log("caca")
+                }
+                    
+                // this is the speed 
+                x+=dx;
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <style>
+            ol{
+                /* display the ol list in the right part of the page */
+                float:right;
+            }
+        </style>
+
+    </head>
+    <body>
+        <ul>
+            <li>1.pisici</li>
+            <li>2.catei</li>
+            <li>3.maimutele</li>
+        </ul>
+
+        <ol>
+            <li>1.pisici</li>
+            <li>2.catei</li>
+            <li>3.maimutele</li>
+        </ol>
+
+        <div>
+            This web page is loading and we can use it to control similar text
+        </div>
+
+        <button id="btn"> Load image</button>
+
+        <script>
+            let button = document.getElementById("btn").addEventListener('click',addImage);
+            function addImage(){
+                let accessDiv = document.querySelector("div");
+                accessDiv.innerHTML="This is the random image. I will color this text with red.The image will have a height of 480px and width of 320px";
+                accessDiv.style.color="red";
+                accessDiv.style.height="480px";
+                accessDiv.style.width="320px";
+                let x=Math.random();
+                accessDiv.style.backgroundImage="url(https://source.unsplash.com/320x480/?random="+x+')';
+            }
+        </script>
+    </body>
+</html>

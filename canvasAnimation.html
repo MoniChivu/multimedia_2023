@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Animation</title>
+    </head>
+    <body >
+        <canvas id="myCanvas" width="300px" height="300px" style="border:1px solid black"></canvas>
+        <br>
+        <label for="size">Size of the rectangle</label>
+        <input type="range" id="size" min="0" max="120" value="60">
+        
+        <label for="colorpicker">Color</label>
+        <input type="color" id="colorpicker" value="#000ff">
+        
+        <label for="width">Line width of outline using:</label>
+        <input type="number" id="width">
+        
+        <label for="speed">Speed</label>
+        <input type="range" id="speed" onclick="changeSpeed" min="10">
+
+        <script>
+            input = document.getElementById("speed");
+            canvas=document.getElementById("myCanvas");
+            ctx=canvas.getContext("2d");
+            ctx.setFilledStyle="red";
+            size=10;
+            i=0;
+            j=0;
+            speed=10;
+                
+            function changeSpeed(){
+                speed = input.value;
+            }
+
+            function drawRect(x,y){
+                ctx.fillRect(x,y,50,50);
+            }
+
+            function update(){
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                drawRect(i,j);
+                ++i;
+                i%=canvas.width;
+                ++j;
+                j%=canvas.height;
+            }
+
+            setInterval(function(){update()},speed);
+         
+        </script>
+    </body>
+    
+</html>
