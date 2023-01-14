@@ -20,24 +20,24 @@
             svg=document.getElementById('mySvg');
             x=20;
             y=50;
-            dx=1;
+            dy=1;
 
             function drawEllipse(x,y){
                 svg.innerHTML=`<ellipse cx='${x}' cy='${y}'  rx='10' ry='10' style="fill:yellow;stroke:purple;stroke-width:1"/>`
             }
 
             function animate(){
-                 requestAnimationFrame(animate);
+                requestAnimationFrame(animate);
                 drawEllipse(x,y);
-                x+=dx;
-                if(x>400){
-                x=20;
+                y+=dy;
+                if(y>400){
+                y=50;
                 // 
             }
             }
 
             animate();
-            //  setInterval(animate, 1000);
+            
 
             
         </script>
