@@ -7,10 +7,16 @@
         <script>
             canvas=document.getElementById("myCanvas");
             c=canvas.getContext("2d");
-            var x=200;
+            var x=Math.random()*300;
+
             // velocity/speed variable
-            var dx=1;
-            var y=200;
+            var dx=4;
+
+            var y=Math.random()*300;
+
+            // velocity/speed variable
+            var dy=4;
+
             var radius=30;
             // var width=innerWidth;
             animate();
@@ -23,7 +29,7 @@
                 c.clearRect(0,0,innerWidth,innerHeight);
                 // console.log("merge");
                 c.beginPath();
-                c.arc(x,200,radius,0,Math.PI*2,false);
+                c.arc(x,y,radius,0,Math.PI*2,false);
                 c.strokeStyle='blue';
                 c.stroke();
 
@@ -31,9 +37,14 @@
                     dx=-dx;
                     console.log("caca")
                 }
+                if(y+radius>300 || y-radius<0)
+                {
+                    dy=-dy;
+                }
                     
                 // this is the speed 
                 x+=dx;
+                y+=dy;
             }
         </script>
     </body>
