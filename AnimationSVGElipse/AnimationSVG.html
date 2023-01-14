@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <p>Scrieti aplicatia HTML5 si codul
+            Javascript care deplaseazã vertical de sus in jos o elipsa intr-un obiect sug.
+            Viteza de deplasare trebuie sá fie de 30 pixeli pe secundã. 
+            Atunci când elipsa depâseste marginea de jos a canvas-ului trebuie repozitionata in partea de sus a svg-ului.</p>
+    </head>
+    <body>
+        <!-- 
+            The cx attribute defines the x coordinate of the center of the ellipse
+            The cy attribute defines the y coordinate of the center of the ellipse
+            The rx attribute defines the horizontal radius
+            The ry attribute defines the vertical radius
+         -->
+        <svg id = "mySvg" height="400" width="500" style="border: 1px solid black">
+            
+        </svg> 
+
+        <script>
+            svg=document.getElementById('mySvg');
+            x=20;
+            y=50;
+            dx=1;
+
+            function drawEllipse(x,y){
+                svg.innerHTML=`<ellipse cx='${x}' cy='${y}'  rx='10' ry='10' style="fill:yellow;stroke:purple;stroke-width:1"/>`
+            }
+
+            function animate(){
+                 requestAnimationFrame(animate);
+                drawEllipse(x,y);
+                x+=dx;
+                if(x>400){
+                x=20;
+                // 
+            }
+            }
+
+            animate();
+            //  setInterval(animate, 1000);
+
+            
+        </script>
+    </body>
+
+</html>
