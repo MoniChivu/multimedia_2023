@@ -1,0 +1,84 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <canvas id="myCanvas" width="1024" height="768"></canvas>
+        <script>
+            var mx=null;
+            var my=null;
+            window.onload=function(){
+                
+                var noise=100;
+                var notOnImage=false;
+
+
+                // pasul 1: canvas si context
+                var canvas=document.getElementById("myCanvas");
+                var ctx=canvas.getContext("2d");
+                w=canvas.width;
+                h=canvas.height;
+
+                // pasul 2: cream obiectul imagine si incarcam sursa
+                let img=new Image();
+                img.src='Penguins.jpg';
+          
+
+                img.onload=function(){
+                    document.addEventListener("mousemove",mousemove);
+                    modifyImage(mx,my);
+                }
+
+                function modImage(x,y){
+                    // pasul 3: desenam imaginea
+                    ctx.drawImage(img,0,0,w,h);
+                    // pasul 4: luam image data din context
+                    var imageData=ctx.getImageData(0,0,w,h);
+                    // pasul 5: luam matricea de puncte
+                    var pixels=imageData.data;
+                    // console.log(pixels)
+
+                    if(x==null || y==null){
+                        notOnImage=true;
+                    }
+                    else if(x>w || y>h){
+                        notOnImage=true;
+                    }
+
+                    for(let i=0;i<h;i++){
+                        for(let j=0;j<w;j++){
+                            var pos=(i*4)*w+j*4;
+                            var distance;
+
+                            if(notOnImage){
+                                distance=0;
+                            }
+                            else{
+                                distance =Math.sqrt((i-y)*(i-y)+(j-x)*(j-x));
+                            }
+
+                            if(notOnImage || distance>100){
+                                var avg=(pixels[pos] + pixels[pos+1] + pixels[pos+2])/3;
+                                pixels[pos]=avg;
+                                pixels[pos+1]=avg;
+                                pixels[pos+2]=avg;
+                            }
+                            else{
+                                pixels[pos+3]*=Math.random()*noise;
+                            }
+
+                        }
+                    }
+
+                    ctx.putImageData(imageData,0,0);
+                };
+
+                const mousemove=function(event){
+                    mx=event.clientX;
+                    my=event.clientY;
+                    modImage(mx,my);
+                };
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <p>Scrieti aplicatia HTML5 si codul Javascript care afiseaza in canvas 
+            imagine din jurul coordonatelor mouse-ului pe o raza de 30 pixeli la apasarea butonului stanga.
+            Imaginea initiala in canvas este mascata cu negru.</p>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="1024" height="768"></canvas>
+        <script>
+            var mx=null;
+            var my=null;
+            window.onload=function(){
+                var canvas=document.getElementById("myCanvas");
+                var ctx=canvas.getContext("2d");
+                let w = canvas.width;
+                let h = canvas.height;
+
+                let img=new Image();
+                img.src="./Penguins.jpg";
+
+                img.onload=function(){
+                    document.addEventListener("mousemove",mousemove);
+                    modifyImage(mx,my);
+                }
+
+                function modifyImage(x,y){
+                    var noise=10;
+                    ctx.drawImage(img, 0, 0, w,h);
+                    var imageData = ctx.getImageData(0,0,w,h);
+                    // containing the data in the RGBA order, with integer values between 0 and 255.
+                    var pixels = imageData.data;
+                  
+
+                    let notOnImage=false;
+                    if(x==null || y==null){
+                        notOnImage=true;
+                    }
+                    else if(x>w || y>h){
+                        notOnImage=true;
+                    }
+
+                    for(let i=0;i<h;i++){
+                        for(let j=0;j<w;j++){
+                            var pos=(i*4)*w+j*4;
+                            var distance;
+
+                            if(notOnImage){
+                                distance=0;
+                            }
+                            else{
+                                distance =Math.sqrt((i-y)*(i-y)+(j-x)*(j-x));
+                            }
+
+                            if(notOnImage || distance>100){
+                                var avg=(pixels[pos] + pixels[pos+1] + pixels[pos+2])/3;
+                                pixels[pos]=avg;
+                                pixels[pos+1]=avg;
+                                pixels[pos+2]=avg;
+                            }
+                            else{
+                                pixels[pos+3]*=Math.random()*noise;
+                            }
+
+                        }
+                    }
+                    ctx.putImageData(imageData,0,0);
+                };
+
+                const mousemove=function(event){
+                    mx=event.clientX;
+                    my=event.clientY;
+                    modifyImage(mx,my);
+                };
+
+            };
+            
+        </script>
+    </body>
+</html>

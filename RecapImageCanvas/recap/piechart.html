@@ -1,0 +1,58 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <canvas id="myCanvas" width="800" height="800"></canvas>
+
+        <script>
+            let canvas=document.getElementById("myCanvas");
+            let ctx=canvas.getContext("2d");
+            cx=canvas.width/2;
+            cy=canvas.height/2;
+            const margin=30;
+            rad = cx<cy ? cx-margin : cy-margin;
+
+
+            values=[10,20,30,40,50,60,70]
+            drawPieChart(cx,cy,rad,values);
+
+            function getSumOfValues(values){
+                sum=0;
+                for(let i=0;i<values.length;i++){
+                  sum+=values[i];
+                }
+
+                return sum;
+            }
+
+            function drawPieChart(cx,cy,rad,values)
+            {
+                startAngle=0;
+                endAngle=0;
+                let sum=getSumOfValues(values);
+
+                for(let i=0;i<values.length;i++){
+                    ctx.beginPath();
+                    startAngle=endAngle;
+                    red=Math.random()*255;
+                    blue=Math.random()*255;
+                    green=Math.random()*255;
+
+                    color='rgb('+red+','+green+','+blue+')';
+
+                    pieSlice=values[i]/sum;
+                    endAngle=startAngle+pieSlice*2*Math.PI;
+                    ctx.arc(cx,cy,rad,startAngle,endAngle);
+                    ctx.lineTo(cx,cy);
+                    ctx.fillStyle=color;
+                    ctx.fill();
+                    ctx.closePath();
+
+                }
+                
+            }
+
+        </script>
+    </body>
+</html>
