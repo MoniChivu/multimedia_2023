@@ -1,0 +1,28 @@
+.white{
+    border: 1px solid black;
+    height: 200px;
+    width: 50px;
+    display: inline-block;
+}
+
+.black{
+    background-color: black;
+    width: 30px;
+    height: 120px;
+    display: inline-block;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    position: absolute;
+}
+
+#one{
+    left:40px;
+}
+
+#two{
+    left:90px;
+}
+
+#three{
+    left:140px;
+}

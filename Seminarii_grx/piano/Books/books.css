@@ -1,0 +1,20 @@
+#shelf {
+    width: 50%;
+    border-bottom: 15px solid brown;
+    margin: auto;
+    font-size: 0;
+    padding: 0 30px;
+}
+.book {
+    display: inline-block;    
+    height: 300px;
+    padding: 30px 0;
+    border: 1px solid black;
+    font-size: 16px;
+    writing-mode: vertical-rl;
+    vertical-align: top;
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    border-radius: 2px;
+}           

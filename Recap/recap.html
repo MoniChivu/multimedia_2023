@@ -1,0 +1,94 @@
+<html>
+    <body>
+        <canvas id="myCanvas" width="500" height="100" style="border: 1px solid black;"></canvas>
+       <canvas id="myCanvas2" width="500" height="500" style="border: 1px solid black;"></canvas>
+       <canvas id="pieChart" width="500" height="500" style="border:1px solid black"></canvas>
+       <script>
+            let canvas=document.getElementById("myCanvas");
+            let ctx=canvas.getContext('2d');
+            var x=0;
+            let dx=1;
+            var y=30;
+
+            function animate(){
+                requestAnimationFrame(animate);
+                ctx.clearRect(0,0,500,500);
+                ctx.beginPath();
+                ctx.fillRect(x,y,30,30);
+                ctx.fillStyle="red";
+                ctx.stroke();
+                if(x>canvas.width || x<0){
+                    dx=-dx;
+                }
+                x+=dx;
+
+            }
+
+            animate();
+
+            let canvas2=document.getElementById("myCanvas2");
+            let ctx2=canvas2.getContext('2d');
+            var x2=0;
+            var dy=1;
+            var y2=30;
+
+            function animate2(){
+                requestAnimationFrame(animate2);
+                ctx2.clearRect(0,0,500,500);
+                ctx2.beginPath();
+                ctx2.fillRect(x2,y2,30,30);
+                ctx2.fillStyle="red";
+                ctx2.stroke();
+                if(y2>canvas2.height || y2<0){
+                    dy=-dy;
+                }
+                y2+=dy;
+
+            }
+
+            animate2();
+
+            var cp=document.getElementById("pieChart");
+            var cpc=cp.getContext('2d');
+
+            var data=[10,30,50,70,90];
+            cx=cp.width/2;
+            cy=cp.height/2;
+            var margin=30;
+            var rad=cx<cy?cx-margin:cy-margin;
+
+            function drawPie(cx,cy,rad,values){
+
+                var sum=0;
+                var startAngle=0;
+                var endAngle=0;
+                for(let i=0;i<data.length;i++){
+                    sum+=values[i];
+                }
+
+                for(let i=0;i<data.length;i++){
+                    var red=Math.random()*255;
+                    var green=Math.random()*255;
+                    var blue=Math.random()*255;
+
+                    color='rgb('+red+','+green+','+blue+')';
+                    pieSlice=values[i]/sum;
+                    startAngle=endAngle;
+                    cpc.beginPath();
+                    endAngle=startAngle+pieSlice*2*Math.PI;
+                    cpc.arc(cx,cy,rad,startAngle,endAngle);
+                    cpc.lineTo(cx,cy);
+                    cpc.fillStyle=color;
+                    cpc.fill();
+                    cpc.closePath();
+
+                }
+
+            }
+
+            drawPie(cx,cy,rad,data);
+
+
+        </script>
+    </body>
+</html>

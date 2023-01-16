@@ -1,0 +1,101 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <canvas id="myCanvas" width="800" height="800"></canvas>
+        <script>
+            let canvas = document.getElementById("myCanvas");
+            let ctx = canvas.getContext("2d");
+
+            let data = [];
+
+            function generateRandomNumber()
+            {
+                return Math.random() * canvas.height;
+            }
+
+            function generateData()
+            {
+                for (let i = 0; i <= canvas.width; i += 20)
+                {
+                    data.push(generateRandomNumber());
+                }
+            }
+
+            function clearCanvas()
+            {
+                ctx.clearRect(0,0,canvas.width, canvas.height);
+            }
+
+            function drawHorizontalLines()
+            {
+                ctx.strokeStyle = "lightgray";
+                for (let i = 100; i < canvas.height; i+=100)
+                {
+                    ctx.beginPath();
+                    ctx.moveTo(0, i);
+                    ctx.lineTo(canvas.width, i);
+                    ctx.stroke();
+                }
+            }
+
+            function drawVerticalLines()
+            {
+                ctx.strokeStyle = "lightgray";
+                for (let i = 150; i<canvas.width; i+=150)
+                {
+                    ctx.beginPath();
+                    ctx.moveTo(i, 0);
+                    ctx.lineTo(i, canvas.height);
+                    ctx.stroke();
+                }
+            }
+
+            function drawText()
+            {
+                ctx.strokeStyle = "gray";
+                for (let i=100;i<=canvas.height;i+=100)
+                {
+                    ctx.strokeText(canvas.height-i, 5, i - 5);
+                }
+            }
+
+            function drawChart()
+            {
+                ctx.strokeStyle = "red";
+                ctx.beginPath();
+                ctx.moveTo(0, canvas.height - data[0]);
+                for (let i = 1; i <data.length;i++)
+                {
+                    ctx.lineTo(i * 20, canvas.height - data[i]);
+                }
+                ctx.stroke();
+
+            }
+
+            function draw()
+            {
+                //clear canvas
+                clearCanvas();
+                //draw horizontal lines
+                drawHorizontalLines();
+                //draw vertical lines
+                drawVerticalLines();
+                //draw text
+                // drawText();
+                //draw chart
+                drawChart();
+            }
+
+            setInterval(function() {
+                data.shift();
+                data.push(generateRandomNumber());
+                draw();
+            }, 1000);
+
+            generateData();
+            draw();
+        </script>
+    </body>
+</html>

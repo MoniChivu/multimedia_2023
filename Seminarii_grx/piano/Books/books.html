@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="books.css" />
+        <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
+    </head>
+    <body>
+        <div id="shelf"></div>
+        <script>
+            var books = [
+            {
+                title: "Three on a boat",
+                author: "Jerome K. Jerome",
+                pages: 300,
+                color: 'darkred',
+                description: "This book is about three friends going on a boat trip"
+            },
+            {
+                title: "The trial",
+                author: "Franz Kafka",
+                pages: 200,
+                color: 'darkblue',
+                description: "This book is about a man that goes to trial without knowing what he's trialed for"
+            },
+            {
+                title: "The Brave Soldier Svejk",
+                author: "Jaroslav Hasek",
+                pages: 750,
+                color: "#32C352"
+            }
+
+           
+        ]
+
+        
+            let shelf = $("#shelf");
+            for (let i = 0; i < books.length; i++)
+            {
+                let bookHeight = parseInt(books[i].pages/10);
+                let book = $('<div class="book">' + books[i].author + " - " + books[i].title + '</div>');
+                book.css('background-color', books[i].color)
+                    .css('width', bookHeight + 'px')
+                    .css('line-height', bookHeight + 'px');
+                shelf.append(book);
+            }
+
+            $(".book").click(function(event) {
+                let currentBook = $(event.target);
+                currentBook.css("background-color", "pink");
+            })
+        
+
+        </script>
+    </body>
+</html>
+
